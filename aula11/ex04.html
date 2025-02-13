@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>País</title>
+</head>
+<body>
+    <h1>Sistema de País</h1>
+    Informe seu país: <input type="string" name="txtvel" id="txtvel"> 
+    <input type="button" value="Verificar" onclick="calcular()">
+    <div id="res">
+
+    </div>
+    <script>
+        function calcular() {
+            var txtv = window.document.querySelector('input#txtvel')
+            var res= window.document.querySelector('div#res')
+            var vel = String(txtv.value)
+            res.innerHTML = `Seu país é: ${vel}`
+            if (vel == 'Brasil' || vel == 'brasil' || vel == 'BRASIL'){
+                res.innerHTML += `<p> Você mora no Brasil e é brasileiro.</p>`
+            } else {
+                res.innerHTML = '<p> Você não é Brasileiro.</p>'
+            }
+    
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+body {
+    background-color: rgb(102, 125, 255);
+    font-style: arial;
+    text-align: center;
+    margin-top: 300px;
+    font-weight: bolder;
+}
+
+select#flista {
+    width: 150px;
+    text-align: center;
+}
+
+div {
+    text-align: center;
+}
