@@ -170,6 +170,30 @@ console.log('soma:' + soma)
 console.log('maior: ' + maior)
 console.log('menor: ' + menor)
 console.log('media: ' + media)
+
+
+// 13
+/* Implemente uma função para validar se uma senha atende aos requisitos mínimos de segurança, como:
+
+Pelo menos 8 caracteres.
+Pelo menos uma letra maiúscula.
+Pelo menos um número.
+Exemplo: A função pode se chamar validarSenha, e ela retorna true ou false dependendo de a senha atender aos requisitos.*/
+
+function validarSenha(senha) {
+    // Verificar se a senha tem pelo menos 8 caracteres, contém uma letra maiúscula e um número
+    if (senha.length >= 8 && /[A-Z]/.test(senha) && /\d/.test(senha)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+console.log(validarSenha('Gustavo1'));  // true
+console.log(validarSenha('gustavo'));   // false
+console.log(validarSenha('Gustavo'));   // false
+console.log(validarSenha('gus1'));      // false
+
   
 
 
