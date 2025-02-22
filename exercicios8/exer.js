@@ -85,3 +85,78 @@ function removeDuplicates(arr) {
     return [...new Set(arr)];
   }
   
+
+// Given an array of numbers, return the two numbers that add up to the target sum.
+function twoSum(arr, target) {
+  let numMap = new Map();
+
+  for (let i = 0; i < arr.length; i++) {
+    let complement = target - arr[i];
+
+    if (numMap.has(complement)) {
+      return [complement, arr[i]];
+    }
+
+    numMap.set(arr[i], i);
+  }
+
+  return [];
+}
+
+// Given a string, return the most frequent character.
+function mostFrequentChar(str) {
+  let count = {};
+  let maxChar = '';
+  let maxCount = 0;
+
+  for (let char of str) {
+    count[char] = (count[char] || 0) + 1;
+
+    if (count[char] > maxCount) {
+      maxCount = count[char];
+      maxChar = char;
+    }
+  }
+
+  return maxChar;
+}
+
+// Given a string, return the first non-repeating character. If all characters repeat, return null.
+function firstNonRepeatingChar(str) {
+  let count = {};
+
+  for (let char of str) {
+    count[char] = (count[char] || 0) + 1;
+  }
+
+  for (let char of str) {
+    if (count[char] === 1) {
+      return char;
+    }
+  }
+
+  return null;
+}
+
+// Given an array of numbers, return the missing number in the sequence.
+function findMissingNumber(arr) {
+  let n = arr.length + 1;
+  let expectedSum = (n * (n + 1)) / 2;
+  let actualSum = arr.reduce((sum, num) => sum + num, 0);
+
+  return expectedSum - actualSum;
+}
+
+// Given a string, return true if it contains only unique characters, else return false.
+function hasUniqueChars(str) {
+  let seen = new Set();
+
+  for (let char of str) {
+    if (seen.has(char)) {
+      return false;
+    }
+    seen.add(char);
+  }
+
+  return true;
+}
