@@ -160,3 +160,64 @@ function hasUniqueChars(str) {
 
   return true;
 }
+
+
+// Given an array of numbers, return the maximum difference between any two numbers.
+function maxDifference(arr) {
+  if (arr.length < 2) return 0;
+
+  let minVal = arr[0];
+  let maxDiff = 0;
+
+  for (let num of arr) {
+    maxDiff = Math.max(maxDiff, num - minVal);
+    minVal = Math.min(minVal, num);
+  }
+
+  return maxDiff;
+}
+
+// Given a string, return true if it contains at least one vowel (a, e, i, o, u).
+function hasVowel(str) {
+  return /[aeiouAEIOU]/.test(str);
+}
+
+// Given a string, reverse each word but keep the order of the words.
+function reverseWords(str) {
+  return str.split(' ').map(word => word.split('').reverse().join('')).join(' ');
+}
+
+// Given an array of numbers, return the second largest number.
+function secondLargest(arr) {
+  let uniqueArr = [...new Set(arr)].sort((a, b) => b - a);
+  return uniqueArr.length > 1 ? uniqueArr[1] : null;
+}
+
+// Given a number, return true if it's a prime number, else return false.
+function isPrime(n) {
+  if (n < 2) return false;
+
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+// Given a string, return the number of words in it.
+function wordCount(str) {
+  return str.trim().split(/\s+/).length;
+}
+
+// Given a sentence, capitalize the first letter of each word.
+function capitalizeWords(str) {
+  return str.replace(/\b\w/g, char => char.toUpperCase());
+}
+
+// Given a number, return the factorial of that number.
+function factorial(n) {
+  if (n === 0 || n === 1) return 1;
+  return n * factorial(n - 1);
+}
