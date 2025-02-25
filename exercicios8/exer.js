@@ -221,3 +221,62 @@ function factorial(n) {
   if (n === 0 || n === 1) return 1;
   return n * factorial(n - 1);
 }
+
+
+
+/*Create a function with two arguments that will return an array of the first n multiples of x.
+Assume both the given number and the number of times to count will be positive numbers greater than 0.
+Return the results as an array or list ( depending on language ). */ 
+function countBy(x,n) {
+  let multilpos = []
+  
+  for (let i=1;i<=n;i++) {
+       multilpos.push(x*i)
+       }
+  return multilpos
+}
+console.log(countBy(2, 5)); 
+console.log(countBy(3, 4)); 
+
+
+/*Deoxyribonucleic acid, DNA is the primary information storage molecule in biological systems. It is composed of four nucleic acid bases Guanine ('G'), Cytosine ('C'), Adenine ('A'), and Thymine ('T').
+Ribonucleic acid, RNA, is the primary messenger molecule in cells. RNA differs slightly from DNA its chemical structure and contains no Thymine. In RNA Thymine is replaced by another nucleic acid Uracil ('U').
+Create a function which translates a given DNA string into RNA. */
+function DNAtoRNA(dna) {
+  if(dna.includes('T')){
+    return dna.replaceAll('T', 'U')
+  } else {
+    return dna
+  }
+}
+
+
+// Given an array of integers, return a new array with each value doubled.
+//1
+function maps(x){
+  return x.map( num => num * 2)
+}
+console.log((maps([1, 2, 3])))
+//2
+function maps(x){
+  let dobro=[]
+  for (let i = 0; i<x.length;i++){
+    dobro.push(x[i] * 2)
+  }
+ return dobro
+}
+console.log((maps([1, 2, 3])))
+
+
+/*Complete the function that accepts a string parameter, and reverses each word in the string. All spaces in the string should be retained. */
+function reverseWords(str) {
+  return str.split(' ').map(word => word.split('').reverse().join('')).join(' ')
+}
+console.log(reverseWords('The quick brown fox jumps over the lazy dog'))
+
+
+//Given an array of integers your solution should find the smallest integer.
+function findSmallestInt(arr) {
+  let min = Math.min(...arr)
+  return min;
+}
