@@ -280,3 +280,74 @@ function findSmallestInt(arr) {
   let min = Math.min(...arr)
   return min;
 }
+
+// Given an array of numbers, return the sum of all positive numbers.
+function sumPositiveNumbers(arr) {
+  return arr.filter(num => num > 0).reduce((sum, num) => sum + num, 0);
+}
+console.log(sumPositiveNumbers([1, -4, 7, 12]));
+
+// Given a string, return true if it is a palindrome, false otherwise.
+function isPalindrome(str) {
+  let cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return cleaned === cleaned.split('').reverse().join('');
+}
+console.log(isPalindrome("racecar")); 
+
+// Given an array of numbers, return the difference between the highest and lowest values.
+function differenceMaxMin(arr) {
+  return Math.max(...arr) - Math.min(...arr);
+}
+console.log(differenceMaxMin([10, 5, 20, 8])); 
+
+// Given a sentence, return the word with the most characters.
+function longestWord(sentence) {
+  return sentence.split(' ').reduce((longest, current) => current.length > longest.length ? current : longest, '');
+}
+console.log(longestWord("The quick brown fox jumps over the lazy dog")); 
+
+// Given a number, return the sum of its digits.
+function sumDigits(num) {
+  return Math.abs(num).toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
+}
+console.log(sumDigits(123)); 
+
+// Given a string, return true if it contains only numbers, false otherwise.
+function isNumeric(str) {
+  return /^[0-9]+$/.test(str);
+}
+console.log(isNumeric("12345")); 
+
+// Given a string, return a new string with all vowels removed.
+function removeVowels(str) {
+  return str.replace(/[aeiouAEIOU]/g, '');
+}
+console.log(removeVowels("Hello World")); 
+
+// Given a number, return an array of its digits.
+function numberToDigits(num) {
+  return num.toString().split('').map(Number);
+}
+console.log(numberToDigits(12345)); 
+
+// Given an array of numbers, return the number that appears an odd number of times.
+function findOdd(arr) {
+  return arr.find(num => arr.filter(x => x === num).length % 2 !== 0);
+}
+console.log(findOdd([1, 2, 3, 2, 3, 1, 3])); 
+
+// Given a string, return the most common character.
+function mostCommonChar(str) {
+  let count = {};
+  let maxChar = '';
+  let maxCount = 0;
+  for (let char of str) {
+    count[char] = (count[char] || 0) + 1;
+    if (count[char] > maxCount) {
+      maxCount = count[char];
+      maxChar = char;
+    }
+  }
+  return maxChar;
+}
+console.log(mostCommonChar("javascript")); 
