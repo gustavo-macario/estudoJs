@@ -281,6 +281,7 @@ function findSmallestInt(arr) {
   return min;
 }
 
+<<<<<<< HEAD
 // Given an array of numbers, return the sum of all positive numbers.
 function sumPositiveNumbers(arr) {
   return arr.filter(num => num > 0).reduce((sum, num) => sum + num, 0);
@@ -351,3 +352,79 @@ function mostCommonChar(str) {
   return maxChar;
 }
 console.log(mostCommonChar("javascript")); 
+=======
+// Given a number, return the next prime number.
+function nextPrime(n) {
+  function isPrime(num) {
+    if (num < 2) return false;
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+      if (num % i === 0) return false;
+    }
+    return true;
+  }
+
+  let next = n + 1;
+  while (!isPrime(next)) {
+    next++;
+  }
+  return next;
+}
+
+// Given an array of numbers, return the second smallest number.
+function secondSmallest(arr) {
+  let uniqueArr = [...new Set(arr)].sort((a, b) => a - b);
+  return uniqueArr.length > 1 ? uniqueArr[1] : null;
+}
+
+// Given an array of numbers, return the sum of odd numbers.
+function sumOddNumbers(arr) {
+  return arr.filter(num => num % 2 !== 0).reduce((sum, num) => sum + num, 0);
+}
+
+// Given a number, return an array containing its digits in reverse order.
+function reverseDigits(n) {
+  return String(n).split('').reverse().map(Number);
+}
+
+// Given a number, check if it is an Armstrong number.
+function isArmstrong(n) {
+  let digits = String(n).split('').map(Number);
+  let power = digits.length;
+  let sum = digits.reduce((acc, digit) => acc + Math.pow(digit, power), 0);
+  return sum === n;
+}
+
+// Given an array of strings, return the longest string.
+function longestString(arr) {
+  return arr.reduce((longest, current) => current.length > longest.length ? current : longest, "");
+}
+
+// Given a number, check if it is a perfect number.
+function isPerfectNumber(n) {
+  let sum = 0;
+  for (let i = 1; i < n; i++) {
+    if (n % i === 0) sum += i;
+  }
+  return sum === n;
+}
+
+// Given an array of numbers, return the greatest common divisor (GCD).
+function gcd(arr) {
+  function findGCD(a, b) {
+    return b === 0 ? a : findGCD(b, a % b);
+  }
+  return arr.reduce((acc, num) => findGCD(acc, num));
+}
+
+// Given a string, return true if it is a palindrome, ignoring case and non-alphanumeric characters.
+function isPalindrome(str) {
+  let cleanStr = str.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return cleanStr === cleanStr.split('').reverse().join('');
+}
+
+// Given a number, return the nth Fibonacci number.
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+>>>>>>> 9a5629d4eec13039107f9f3b7c6add741a37a0ea
