@@ -99,6 +99,7 @@ function twoSum(arr, target) {
 
     numMap.set(arr[i], i);
   }
+  
 
   return [];
 }
@@ -281,7 +282,6 @@ function findSmallestInt(arr) {
   return min;
 }
 
-<<<<<<< HEAD
 // Given an array of numbers, return the sum of all positive numbers.
 function sumPositiveNumbers(arr) {
   return arr.filter(num => num > 0).reduce((sum, num) => sum + num, 0);
@@ -352,7 +352,7 @@ function mostCommonChar(str) {
   return maxChar;
 }
 console.log(mostCommonChar("javascript")); 
-=======
+
 // Given a number, return the next prime number.
 function nextPrime(n) {
   function isPrime(num) {
@@ -427,4 +427,80 @@ function fibonacci(n) {
   if (n <= 1) return n;
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
->>>>>>> 9a5629d4eec13039107f9f3b7c6add741a37a0ea
+
+
+
+function countWords(str) {
+  return str.split(/\s+/).filter(word => word.length > 0).length;
+}
+console.log(countWords("The quick brown fox")); 
+
+
+function productOfArray(arr) {
+  return arr.reduce((product, num) => product * num, 1);
+}
+console.log(productOfArray([1, 2, 3, 4])); 
+
+
+function sumPrimes(num) {
+  function isPrime(n) {
+    if (n < 2) return false;
+    for (let i = 2; i <= Math.sqrt(n); i++) {
+      if (n % i === 0) return false;
+    }
+    return true;
+  }
+
+  return Array.from({ length: num + 1 }, (_, i) => i)
+    .filter(isPrime)
+    .reduce((sum, prime) => sum + prime, 0);
+}
+console.log(sumPrimes(10));
+
+
+
+function longestPalindrome(s) {
+  if (s.length < 2) return s;
+  
+  let start = 0, maxLength = 0;
+  
+  function expandAroundCenter(left, right) {
+    while (left >= 0 && right < s.length && s[left] === s[right]) {
+      left--;
+      right++;
+    }
+    return right - left - 1;
+  }
+
+  for (let i = 0; i < s.length; i++) {
+    let len1 = expandAroundCenter(i, i);
+    let len2 = expandAroundCenter(i, i + 1);
+    let len = Math.max(len1, len2);
+    
+    if (len > maxLength) {
+      start = i - Math.floor((len - 1) / 2);
+      maxLength = len;
+    }
+  }
+  
+  return s.substring(start, start + maxLength);
+}
+console.log(longestPalindrome("babad")); 
+
+
+function permute(arr) {
+  if (arr.length === 0) return [[]];
+
+  let result = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    let rest = [...arr.slice(0, i), ...arr.slice(i + 1)];
+    for (let perm of permute(rest)) {
+      result.push([arr[i], ...perm]);
+    }
+  }
+
+  return result;
+}
+console.log(permute([1, 2, 3]));
+
