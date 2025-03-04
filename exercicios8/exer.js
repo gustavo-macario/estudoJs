@@ -504,3 +504,120 @@ function permute(arr) {
 }
 console.log(permute([1, 2, 3]));
 
+
+// 1 Given a string, return the longest substring without repeating characters.
+function longestUniqueSubstring(s) {
+  let set = new Set();
+  let left = 0, maxLength = 0;
+
+  for (let right = 0; right < s.length; right++) {
+    while (set.has(s[right])) {
+      set.delete(s[left]);
+      left++;
+    }
+    set.add(s[right]);
+    maxLength = Math.max(maxLength, right - left + 1);
+  }
+  return maxLength;
+}
+console.log(longestUniqueSubstring("abcabcbb"));
+
+// 2️ Given an array of integers, return the subarray with the maximum sum.
+function maxSubarraySum(nums) {
+  let maxSum = nums[0];
+  let currentSum = nums[0];
+
+  for (let i = 1; i < nums.length; i++) {
+    currentSum = Math.max(nums[i], currentSum + nums[i]);
+    maxSum = Math.max(maxSum, currentSum);
+  }
+  return maxSum;
+}
+console.log(maxSubarraySum([-2,1,-3,4,-1,2,1,-5,4])); 
+
+// 3️ Given a binary tree, return its level-order traversal.
+class TreeNode {
+  constructor(val, left = null, right = null) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
+}
+function levelOrder(root) {
+  if (!root) return [];
+  let queue = [root], result = [];
+
+  while (queue.length) {
+    let level = [], size = queue.length;
+    for (let i = 0; i < size; i++) {
+      let node = queue.shift();
+      level.push(node.val);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+    result.push(level);
+  }
+  return result;
+}
+
+// 4️ Given an integer, return its binary representation.
+function intToBinary(n) {
+  return (n >>> 0).toString(2);
+}
+console.log(intToBinary(10)); 
+
+// 5️ Given a binary string, return its decimal value.
+function binaryToInt(binary) {
+  return parseInt(binary, 2);
+}
+console.log(binaryToInt("1010")); 
+
+// 6️ Given a string, return true if it's an anagram of a palindrome.
+function isPalindromeAnagram(s) {
+  let count = new Map();
+  for (let char of s) count.set(char, (count.get(char) || 0) + 1);
+  let oddCount = 0;
+  for (let value of count.values()) {
+    if (value % 2 !== 0) oddCount++;
+  }
+  return oddCount <= 1;
+}
+console.log(isPalindromeAnagram("civic")); 
+
+// 7️ Given a number, return the number of set bits in its binary representation.
+function countSetBits(n) {
+  return n.toString(2).split('0').join('').length;
+}
+console.log(countSetBits(15)); 
+
+// 8️ Given a sorted array, return the index where a target number should be inserted.
+function searchInsertPosition(arr, target) {
+  let left = 0, right = arr.length - 1;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (arr[mid] === target) return mid;
+    else if (arr[mid] < target) left = mid + 1;
+    else right = mid - 1;
+  }
+  return left;
+}
+console.log(searchInsertPosition([1,3,5,6], 5)); 
+
+// 9️ Given a matrix, return its transpose.
+function transposeMatrix(matrix) {
+  return matrix[0].map((_, colIndex) => matrix.map(row => row[colIndex]));
+}
+console.log(transposeMatrix([[1,2,3],[4,5,6],[7,8,9]])); 
+
+
+//  Given an array of numbers, return true if any number appears at least twice.
+function containsDuplicate(arr) {
+  let set = new Set();
+  for (let num of arr) {
+    if (set.has(num)) return true;
+    set.add(num);
+  }
+  return false;
+}
+console.log(containsDuplicate([1,2,3,1])); 
+
