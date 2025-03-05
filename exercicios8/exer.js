@@ -621,3 +621,81 @@ function containsDuplicate(arr) {
 }
 console.log(containsDuplicate([1,2,3,1])); 
 
+
+// 1️ Given a string, return the longest palindromic substring.
+function longestPalindrome(s) {
+  if (s.length <= 1) return s;
+  let start = 0, maxLength = 1;
+
+  function expandAroundCenter(left, right) {
+    while (left >= 0 && right < s.length && s[left] === s[right]) {
+      let length = right - left + 1;
+      if (length > maxLength) {
+        start = left;
+        maxLength = length;
+      }
+      left--;
+      right++;
+    }
+  }
+
+  for (let i = 0; i < s.length; i++) {
+    expandAroundCenter(i, i);     // Odd length palindrome
+    expandAroundCenter(i, i + 1); // Even length palindrome
+  }
+
+  return s.substring(start, start + maxLength);
+}
+console.log(longestPalindrome("babad")); 
+
+// 2️ Given an array of numbers, find the contiguous subarray with the maximum product.
+function maxProductSubarray(nums) {
+  let maxProd = nums[0], minProd = nums[0], result = nums[0];
+
+  for (let i = 1; i < nums.length; i++) {
+    let tempMax = maxProd;
+    maxProd = Math.max(nums[i], nums[i] * maxProd, nums[i] * minProd);
+    minProd = Math.min(nums[i], nums[i] * tempMax, nums[i] * minProd);
+    result = Math.max(result, maxProd);
+  }
+
+  return result;
+}
+console.log(maxProductSubarray([2,3,-2,4])); 
+
+// 3️ Given two strings, check if one is a permutation of the other.
+function isPermutation(s1, s2) {
+  if (s1.length !== s2.length) return false;
+  return s1.split('').sort().join('') === s2.split('').sort().join('');
+}
+console.log(isPermutation("listen", "silent"));
+
+// 4️ Given an array of numbers, return the length of the longest increasing subsequence.
+function longestIncreasingSubsequence(nums) {
+  if (nums.length === 0) return 0;
+  let dp = Array(nums.length).fill(1);
+
+  for (let i = 1; i < nums.length; i++) {
+    for (let j = 0; j < i; j++) {
+      if (nums[i] > nums[j]) {
+        dp[i] = Math.max(dp[i], dp[j] + 1);
+      }
+    }
+  }
+  return Math.max(...dp);
+}
+console.log(longestIncreasingSubsequence([10,9,2,5,3,7,101,18])); 
+
+// 5️ Given an array of numbers, find the majority element (appears more than n/2 times).
+function majorityElement(nums) {
+  let count = 0, candidate = null;
+
+  for (let num of nums) {
+    if (count === 0) candidate = num;
+    count += (num === candidate) ? 1 : -1;
+  }
+  return candidate;
+}
+console.log(majorityElement([3,2,3])); 
+
+
