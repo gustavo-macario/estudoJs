@@ -622,7 +622,7 @@ function containsDuplicate(arr) {
 console.log(containsDuplicate([1,2,3,1])); 
 
 
-// 1️ Given a string, return the longest palindromic substring.
+//  Given a string, return the longest palindromic substring.
 function longestPalindrome(s) {
   if (s.length <= 1) return s;
   let start = 0, maxLength = 1;
@@ -640,15 +640,15 @@ function longestPalindrome(s) {
   }
 
   for (let i = 0; i < s.length; i++) {
-    expandAroundCenter(i, i);     // Odd length palindrome
-    expandAroundCenter(i, i + 1); // Even length palindrome
+    expandAroundCenter(i, i);     
+    expandAroundCenter(i, i + 1); 
   }
 
   return s.substring(start, start + maxLength);
 }
 console.log(longestPalindrome("babad")); 
 
-// 2️ Given an array of numbers, find the contiguous subarray with the maximum product.
+//  Given an array of numbers, find the contiguous subarray with the maximum product.
 function maxProductSubarray(nums) {
   let maxProd = nums[0], minProd = nums[0], result = nums[0];
 
@@ -663,14 +663,14 @@ function maxProductSubarray(nums) {
 }
 console.log(maxProductSubarray([2,3,-2,4])); 
 
-// 3️ Given two strings, check if one is a permutation of the other.
+//  Given two strings, check if one is a permutation of the other.
 function isPermutation(s1, s2) {
   if (s1.length !== s2.length) return false;
   return s1.split('').sort().join('') === s2.split('').sort().join('');
 }
 console.log(isPermutation("listen", "silent"));
 
-// 4️ Given an array of numbers, return the length of the longest increasing subsequence.
+//  Given an array of numbers, return the length of the longest increasing subsequence.
 function longestIncreasingSubsequence(nums) {
   if (nums.length === 0) return 0;
   let dp = Array(nums.length).fill(1);
@@ -686,7 +686,7 @@ function longestIncreasingSubsequence(nums) {
 }
 console.log(longestIncreasingSubsequence([10,9,2,5,3,7,101,18])); 
 
-// 5️ Given an array of numbers, find the majority element (appears more than n/2 times).
+//  Given an array of numbers, find the majority element (appears more than n/2 times).
 function majorityElement(nums) {
   let count = 0, candidate = null;
 
@@ -697,5 +697,130 @@ function majorityElement(nums) {
   return candidate;
 }
 console.log(majorityElement([3,2,3])); 
+
+
+// Given a string, find the longest substring without repeating characters.
+function longestUniqueSubstring(s) {
+  let charIndex = new Map(), maxLength = 0, start = 0;
+
+  for (let i = 0; i < s.length; i++) {
+    if (charIndex.has(s[i]) && charIndex.get(s[i]) >= start) {
+      start = charIndex.get(s[i]) + 1;
+    }
+    charIndex.set(s[i], i);
+    maxLength = Math.max(maxLength, i - start + 1);
+  }
+  return maxLength;
+}
+console.log(longestUniqueSubstring("abcabcbb")); 
+
+//  Given an array, find the subarray with the maximum sum.
+function maxSubarraySum(nums) {
+  let maxSum = nums[0], currentSum = nums[0];
+
+  for (let i = 1; i < nums.length; i++) {
+    currentSum = Math.max(nums[i], currentSum + nums[i]);
+    maxSum = Math.max(maxSum, currentSum);
+  }
+  return maxSum;
+}
+console.log(maxSubarraySum([-2,1,-3,4,-1,2,1,-5,4])); 
+
+// Find the median of two sorted arrays.
+function findMedianSortedArrays(nums1, nums2) {
+  let merged = [...nums1, ...nums2].sort((a, b) => a - b);
+  let mid = Math.floor(merged.length / 2);
+
+  return merged.length % 2 === 0 
+    ? (merged[mid - 1] + merged[mid]) / 2 
+    : merged[mid];
+}
+console.log(findMedianSortedArrays([1, 3], [2])); 
+
+// Given a matrix, rotate it 90 degrees clockwise.
+function rotateMatrix(matrix) {
+  let n = matrix.length;
+  for (let i = 0; i < n; i++) {
+    for (let j = i; j < n; j++) {
+      [matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]];
+    }
+  }
+  matrix.forEach(row => row.reverse());
+  return matrix;
+}
+console.log(rotateMatrix([[1,2,3],[4,5,6],[7,8,9]])); 
+
+
+// Find all unique triplets in an array that sum to zero.
+function threeSum(nums) {
+  nums.sort((a, b) => a - b);
+  let res = [];
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    if (i > 0 && nums[i] === nums[i - 1]) continue;
+    let left = i + 1, right = nums.length - 1;
+
+    while (left < right) {
+      let sum = nums[i] + nums[left] + nums[right];
+
+      if (sum === 0) {
+        res.push([nums[i], nums[left], nums[right]]);
+        while (nums[left] === nums[left + 1]) left++;
+        while (nums[right] === nums[right - 1]) right--;
+        left++;
+        right--;
+      } else if (sum < 0) {
+        left++;
+      } else {
+        right--;
+      }
+    }
+  }
+  return res;
+}
+console.log(threeSum([-1,0,1,2,-1,-4])); 
+
+
+// Find the shortest path in a grid using BFS.
+function shortestPath(grid) {
+  let rows = grid.length, cols = grid[0].length;
+  if (grid[0][0] === 1 || grid[rows - 1][cols - 1] === 1) return -1;
+  let queue = [[0, 0, 1]], directions = [[0,1],[1,0],[0,-1],[-1,0]];
+
+  while (queue.length) {
+    let [r, c, steps] = queue.shift();
+    if (r === rows - 1 && c === cols - 1) return steps;
+
+    for (let [dr, dc] of directions) {
+      let nr = r + dr, nc = c + dc;
+      if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr][nc] === 0) {
+        queue.push([nr, nc, steps + 1]);
+        grid[nr][nc] = 1;
+      }
+    }
+  }
+  return -1;
+}
+console.log(shortestPath([[0,0,0],[1,1,0],[1,1,0]])); 
+
+
+// Solve the N-Queens problem (backtracking).
+function solveNQueens(n) {
+  let res = [];
+  function solve(board = [], row = 0) {
+    if (row === n) {
+      res.push(board.map(col => ".".repeat(col) + "Q" + ".".repeat(n - col - 1)));
+      return;
+    }
+    for (let col = 0; col < n; col++) {
+      if (board.some((c, r) => c === col || r - c === row - col || r + c === row + col)) continue;
+      solve([...board, col], row + 1);
+    }
+  }
+  solve();
+  return res;
+}
+console.log(solveNQueens(4)); 
+
 
 
