@@ -823,4 +823,92 @@ function solveNQueens(n) {
 console.log(solveNQueens(4)); 
 
 
+// Find the missing number in an array from 1 to n.
+function missingNumber(nums) {
+  let n = nums.length;
+  let expectedSum = (n * (n + 1)) / 2;
+  let actualSum = nums.reduce((sum, num) => sum + num, 0);
+  return expectedSum - actualSum;
+}
+console.log(missingNumber([3, 0, 1]));
+
+// Find the longest common prefix among an array of strings.
+function longestCommonPrefix(strs) {
+  if (!strs.length) return "";
+  let prefix = strs[0];
+
+  for (let str of strs) {
+    while (!str.startsWith(prefix)) {
+      prefix = prefix.slice(0, -1);
+      if (!prefix) return "";
+    }
+  }
+  return prefix;
+}
+console.log(longestCommonPrefix(["flower", "flow", "flight"])); 
+
+//  Given a string, find all permutations of it.
+function permuteString(s) {
+  let res = [];
+
+  function backtrack(path, remaining) {
+    if (!remaining.length) res.push(path);
+    for (let i = 0; i < remaining.length; i++) {
+      backtrack(path + remaining[i], remaining.slice(0, i) + remaining.slice(i + 1));
+    }
+  }
+  
+  backtrack("", s);
+  return res;
+}
+console.log(permuteString("abc")); 
+
+
+// Given an array of numbers, return all unique subsets.
+function subsets(nums) {
+  let res = [];
+
+  function backtrack(start, path) {
+    res.push([...path]);
+    for (let i = start; i < nums.length; i++) {
+      path.push(nums[i]);
+      backtrack(i + 1, path);
+      path.pop();
+    }
+  }
+
+  backtrack(0, []);
+  return res;
+}
+console.log(subsets([1, 2, 3])); 
+
+
+// Implement a LRU (Least Recently Used) Cache.
+class LRUCache {
+  constructor(capacity) {
+    this.capacity = capacity;
+    this.cache = new Map();
+  }
+
+  get(key) {
+    if (!this.cache.has(key)) return -1;
+    let value = this.cache.get(key);
+    this.cache.delete(key);
+    this.cache.set(key, value);
+    return value;
+  }
+
+  put(key, value) {
+    if (this.cache.has(key)) this.cache.delete(key);
+    this.cache.set(key, value);
+    if (this.cache.size > this.capacity) this.cache.delete(this.cache.keys().next().value);
+  }
+}
+let cache = new LRUCache(2);
+cache.put(1, 1);
+cache.put(2, 2);
+console.log(cache.get(1)); 
+cache.put(3, 3);
+console.log(cache.get(2)); 
+
 
