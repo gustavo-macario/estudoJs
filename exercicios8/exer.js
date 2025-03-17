@@ -912,3 +912,88 @@ cache.put(3, 3);
 console.log(cache.get(2)); 
 
 
+// Find the first non-repeating character in a string.
+function firstNonRepeatingChar(s) {
+  let charCount = {};
+  for (let char of s) charCount[char] = (charCount[char] || 0) + 1;
+  for (let char of s) if (charCount[char] === 1) return char;
+  return null;
+}
+console.log(firstNonRepeatingChar("leetcode")); 
+
+// Find all unique triplets in an array that sum to zero.
+function threeSum(nums) {
+  nums.sort((a, b) => a - b);
+  let res = [];
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    if (i > 0 && nums[i] === nums[i - 1]) continue;
+    let left = i + 1, right = nums.length - 1;
+    
+    while (left < right) {
+      let sum = nums[i] + nums[left] + nums[right];
+      if (sum === 0) {
+        res.push([nums[i], nums[left], nums[right]]);
+        while (nums[left] === nums[left + 1]) left++;
+        while (nums[right] === nums[right - 1]) right--;
+        left++;
+        right--;
+      } else if (sum < 0) left++;
+      else right--;
+    }
+  }
+  return res;
+}
+console.log(threeSum([-1, 0, 1, 2, -1, -4])); 
+
+
+//  Find the maximum sum of a contiguous subarray (Kadane's Algorithm).
+function maxSubArray(nums) {
+  let maxSum = nums[0], currentSum = nums[0];
+  
+  for (let i = 1; i < nums.length; i++) {
+    currentSum = Math.max(nums[i], currentSum + nums[i]);
+    maxSum = Math.max(maxSum, currentSum);
+  }
+  return maxSum;
+}
+console.log(maxSubArray([-2,1,-3,4,-1,2,1,-5,4])); 
+
+//  Check if a string is an anagram of another.
+function isAnagram(s1, s2) {
+  if (s1.length !== s2.length) return false;
+  return s1.split("").sort().join("") === s2.split("").sort().join("");
+}
+console.log(isAnagram("listen", "silent")); 
+
+// Rotate an array k times to the right.
+function rotateArray(nums, k) {
+  k %= nums.length;
+  return [...nums.slice(-k), ...nums.slice(0, -k)];
+}
+console.log(rotateArray([1, 2, 3, 4, 5, 6, 7], 3)); 
+
+// Find the longest substring without repeating characters.
+function longestUniqueSubstring(s) {
+  let set = new Set(), left = 0, maxLength = 0;
+
+  for (let right = 0; right < s.length; right++) {
+    while (set.has(s[right])) {
+      set.delete(s[left]);
+      left++;
+    }
+    set.add(s[right]);
+    maxLength = Math.max(maxLength, right - left + 1);
+  }
+  return maxLength;
+}
+console.log(longestUniqueSubstring("abcabcbb")); 
+
+// Find the median of two sorted arrays.
+function findMedianSortedArrays(nums1, nums2) {
+  let merged = [...nums1, ...nums2].sort((a, b) => a - b);
+  let mid = Math.floor(merged.length / 2);
+  return merged.length % 2 === 0 ? (merged[mid - 1] + merged[mid]) / 2 : merged[mid];
+}
+console.log(findMedianSortedArrays([1, 3], [2])); 
+console.log(findMedianSortedArrays([1, 2], [3, 4])); 
